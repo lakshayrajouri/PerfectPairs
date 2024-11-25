@@ -2,14 +2,11 @@
 
 ## To start this program, follow these steps:
 
-### Initialize npm by running:
-
+#### Initialize npm by running:
 ```npm init -y```
 
-## Install the required dependencies:
-
+#### Install the required dependencies:
 ```npm i```
 
-## Start the program:
-
+#### Start the program:
 ```node index.js```
