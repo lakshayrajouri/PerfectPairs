@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= profile.full_name %>'s Profile
+  </title>
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+  <header>
+    <h1>Perfect Pairs Marriage Bureau</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/matches-request">View Match Request</a>
+      <a href="/matches">View Matches</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+  <div class="container">
+    <h1>
+      <%= profile.full_name %>'s Profile
+    </h1>
+    <p><strong>Age:</strong>
+      <%= profile.age %>
+    </p>
+    <p><strong>Gender:</strong>
+      <%= profile.gender %>
+    </p>
+    <p><strong>Bio:</strong>
+      <%= profile.bio %>
+    </p>
+
+    <hr>
+
+    <% if (matchStatus ==='match' ) { %>
+      <form action="/send-message" method="POST">
+        <input type="hidden" name="receiverId" value="<%= profileUserId %>">
+        <textarea name="message" placeholder="Type your message here..." required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <% } else { %>
+        <a href="/send-match-request/<%= profileUserId %>">Send Friend Request</a>
+        <% } %>
+
+          <a href="/dashboard">Back to Dashboard</a>
+  </div>
+
+  <div class="more-options">
+    <button onclick="toggleDropdown()">More Options</button>
+    <div id="dropdown" class="dropdown-content">
+      <button onclick="openReportModal()">Report User</button>
+    </div>
+  </div>
+  
+  <!-- Modal for Reporting -->
+  <div id="reportModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeReportModal()">&times;</span>
+      <h2>Report User</h2>
+      <form action="/report-user/<%= profileUserId %>" method="POST">
+        <label for="reason">Why are you reporting this user?</label>
+        <select name="reason" id="reason" required>
+          <option value="fraud">Fraud</option>
+          <option value="harassing">Harassing</option>
+          <option value="others">Others</option>
+        </select>
+        <div id="additionalInfo" style="display: none;">
+          <label for="info">Please specify:</label>
+          <textarea name="additional_info" id="info"></textarea>
+        </div>
+        <button type="submit">Submit Report</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    // Toggle Dropdown
+    function toggleDropdown() {
+      const dropdown = document.getElementById('dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+  
+    // Open Report Modal
+    function openReportModal() {
+      document.getElementById('reportModal').style.display = 'block';
+    }
+  
+    // Close Report Modal
+    function closeReportModal() {
+      document.getElementById('reportModal').style.display = 'none';
+    }
+  
+    // Show additional info if "Others" is selected
+    document.getElementById('reason').addEventListener('change', function () {
+      const additionalInfo = document.getElementById('additionalInfo');
+      additionalInfo.style.display = this.value === 'others' ? 'block' : 'none';
+    });
+  </script>
+  
+
+<%- include("partials/footer.ejs") %>

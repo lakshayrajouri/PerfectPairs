@@ -1,0 +1,20 @@
+<%- include('partials/loggedinHeader.ejs') %>
+<section class="form-container">
+  <div class="container">
+    <h1>Your Matches</h1>
+    <ul>
+      <% matches.forEach(match=> { %>
+      <li>
+        <div class="match">
+          <p><strong>Name:</strong><%= match.full_name %></p>
+          <p><strong>Age:</strong> <%= match.age %></p>
+          <p><strong>Location:</strong> City, Country</p>
+          <a class="cta-button" href="/profile/<%= match.friend_id %>">View Profile</a>
+        </div>
+      </li>
+      <% }) %>
+    </ul>
+    <a href="/dashboard">Back to Dashboard</a>
+  </div>
+</section>
+<%- include("partials/footer") %>

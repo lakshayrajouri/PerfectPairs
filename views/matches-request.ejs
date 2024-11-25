@@ -1,0 +1,28 @@
+<%- include('partials/loggedinHeader.ejs') %>
+<h1>Friend Requests</h1>
+<div class="form-container">
+    <h2>Received Requests</h2>
+    <ul>
+        <% receivedRequests.forEach(request=> { %>
+        <li>
+            <%= request.sender_id %>
+            <form action="/update-match-request" method="POST">
+            <input type="hidden" name="requestId" value="<%= request.id %>">
+            <button type="submit" name="action" value="accept">Accept</button>
+            <button type="submit" name="action" value="reject">Reject</button>
+            </form>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+<div class="form-container">
+    <h2>Sent Requests</h2>
+    <ul>
+        <% sentRequests.forEach(request=> { %>
+        <li>
+            <%= request.receiver_id %> - Status: <%= request.status %>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+<%- include('partials/footer.ejs') %>

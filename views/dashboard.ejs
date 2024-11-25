@@ -1,0 +1,18 @@
+<%- include("partials/loggedinHeader") %>
+<h2>Available Users</h2>
+<ul>
+  <% if (users.length> 0) { %>
+    <% users.forEach(user=> { %>
+    <li>
+      <%= user.username %>
+        <form action="/send-match-request" method="POST">
+          <input type="hidden" name="receiverId" value="<%= user.id %>">
+          <button type="submit">Send Match Request</button>
+        </form>
+    </li>
+    <% }) %>
+    <% } else { %>
+    <p>No users available to send friend requests.</p>
+  <% } %>
+  </ul>
+<%- include("partials/footer") %>

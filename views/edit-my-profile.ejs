@@ -1,0 +1,32 @@
+<%- include('partials/loggedinHeader.ejs') %>
+
+  <div class="container">
+    <h1>Edit Your Profile</h1>
+    <form action="/edit-my-profile" method="POST">
+      <label for="full_name">Full Name:</label>
+      <input type="text" id="full_name" name="full_name" value="<%= profile.full_name %>" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" value="<%= profile.age %>" required>
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="Male" <%= profile.gender === 'Male' ? 'selected' : '' %>>Male</option>
+        <option value="Female" <%= profile.gender === 'Female' ? 'selected' : '' %>>Female</option>
+        <option value="Other" <%= profile.gender === 'Other' ? 'selected' : '' %>>Other</option>
+      </select>
+
+      <label for="bio">Bio:</label>
+      <textarea id="bio" name="bio" required><%= profile.bio %></textarea>
+
+      <label for="hobbies">Hobbies (comma-separated):</label>
+      <input type="text" id="hobbies" name="hobbies" value="<%= profile.hobbies.join %>">
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" value="<%= profile.location %>">
+
+      <button type="submit">Update Profile</button>
+    </form>
+    <a href="/dashboard">Cancel</a>
+  </div>
+<%- include('partials/footer.ejs') %>

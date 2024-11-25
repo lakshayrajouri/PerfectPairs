@@ -1,0 +1,23 @@
+<%- include('partials/loggedinHeader.ejs') %>
+<div class="container">
+  <h1>Your Messages</h1>
+  <% if (receivedMessages.length > 0) { %>
+  <ul>
+    <% receivedMessages.forEach(message => { %>
+    <li>
+      <p class="message"><strong>From:</strong> <%= message.sender_name %></p>
+      <p class="message"><strong>Message:</strong> <%= message.message %></p>
+      <p class="message-content"><em>Sent at: <%= new Date(message.sent_at).toLocaleString() %></em></p>
+      <hr>
+    </li>
+    <% }) %>
+  </ul>
+  <% } else { %>
+  <p>No messages yet.</p>
+  <% } %>
+  <h3>reply</h3>
+  <input type="text" name="" id="">
+  <button>send</button><br><br><br>
+  <a href="/dashboard">Back to Dashboard</a>
+</div>
+<%- include('partials/footer.ejs') %>

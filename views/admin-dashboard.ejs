@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+</head>
+
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <a href="/admin-logout" class="logout-button">Logout</a>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Reporter</th>
+                <th>Reported</th>
+                <th>Reason</th>
+                <th>Additional Info</th>
+                <th>Status</th>
+                <th>Reported At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reports.forEach(report=> { %>
+                <tr>
+                    <td><%= report.id %></td>
+                    <td><%= report.reporter_name %></td>
+                    <td><%= report.reported_name %></td>
+                    <td><%= report.reason %></td>
+                    <td><%= report.additional_info || 'N/A' %></td>
+                    <td><%= report.status %></td>
+                    <td><%= new Date(report.reported_at).toLocaleString() %></td>
+                    <td>
+                        <a href="/resolve-report/<%= report.id %>">Resolve</a>
+                        <a href="/dismiss-report/<%= report.id %>">Dismiss</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
