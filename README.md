@@ -10,3 +10,10 @@
 
 #### Start the program:
 ```node index.js```
+
+
+## Prerequisites
+Before starting the program, ensure you have:
+- pgAdmin installed and connected to your PostgreSQL server.
+- The database created where the queries will be executed.
+
